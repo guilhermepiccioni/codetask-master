@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>{{ provider.name }} - Provider Detail</title>
+</head>
+<body>
+    <h1>{{ provider.name }} - Provider Detail</h1>
+    <p>Description: {{ provider.description }}</p>
+    {% if provider.image %}
+        <img src="{{ provider.image }}" alt="{{ provider.name }} Logo">
+    {% endif %}
+    {% if provider.url %}
+        <p>External Site: <a href="{{ provider.url }}" target="_blank">{{ provider.url }}</a></p>
+    {% endif %}
+    <h2>Courses</h2>
+    <ul>
+        {% for course in provider.course_set.all %}
+            <li><a href="{% url 'course_detail' course.id %}">{{ course.title }}</a></li>
+        {% endfor %}
+    </ul>
+    <p><a href="{% url 'home' %}">Go to Home</a></p>
+</body>
+</html>

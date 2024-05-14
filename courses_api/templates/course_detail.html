@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>{{ course.title }} - Course Detail</title>
+</head>
+<body>
+    <h1>{{ course.title }} - Course Detail</h1>
+    <p>Description: {{ course.description }}</p>
+    {% if course.provider.image %}
+        <img src="{{ course.provider.image }}" alt="{{ course.provider.name }} Logo">
+    {% endif %}
+    <p><a href="{% url 'course_list' %}">Back to List Courses</a></p>
+</body>
+</html>

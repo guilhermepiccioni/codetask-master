@@ -1,0 +1,61 @@
+[build-system]
+requires = ["setuptools>=63.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "codetask"
+version = "1.0"
+dynamic = ["readme"]
+description = ""
+license = {file = "LICENSE"}
+authors = []
+
+requires-python = ">=3.12"
+dependencies = [
+    "Django<5.1",
+    "psycopg[binary]<3.2"
+]
+[project.optional-dependencies]
+test = [
+    "black<24.2",
+    "mypy<1.9",
+    "pytest-cov<4.2",
+    "pytest<8.1",
+]
+
+[tool.setuptools.packages.find]
+include = ["cotizia"]
+[tool.setuptools.dynamic]
+#version = {attr = "cotizia.VERSION"}
+readme = {file = ["README.md"]}
+
+[tool.black]
+line-length = 120
+target-version = ['py311']
+include = '\.pyi?$'
+
+[tool.mypy]
+ignore_missing_imports = true
+warn_no_return = false
+warn_return_any = false
+follow_imports = "skip"
+strict_optional = true
+exclude = [
+    "^build/"
+]
+
+[tool.pytest.ini_options]
+cache_dir = "/tmp/cache"
+
+[tool.coverage.run]
+source = ["cotizia"]
+branch = true
+command_line="-m pytest"
+omit = [
+ "web.py",
+ "routes.py",
+]
+data_file="/tmp/.coverage"
+[tool.coverage.report]
+skip_empty = true
+show_missing = true
